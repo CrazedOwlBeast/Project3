@@ -101,9 +101,9 @@ void merge(int arr[], int front, int back) {
 //Bucket
 //max = maximum value of the arr
 void bucket(vector<int>& arr, int max) {
-    int n = arr.size();
+    long long n = arr.size();
 
-    int index = 0;
+    long long index = 0;
     vector<vector<int>> buckets;
     for (int i = 0; i < n; i++) {
         vector<int> temp;
@@ -111,7 +111,7 @@ void bucket(vector<int>& arr, int max) {
     }
 
     for (int i = 0; i < n; i++) {
-        index = floor(n * arr[i] / (max + 1));
+        index = floor(n * arr[i] / ((long long)max + 1));
         buckets[index].push_back(arr[i]);
     }
 
@@ -123,4 +123,141 @@ void bucket(vector<int>& arr, int max) {
     for (int i = 0; i < n; i++)
         for (int j = 0; j < buckets[i].size(); j++)
             arr[k++] = buckets[i][j];
+}
+
+void SwapPos(int* a, int* b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+int Partition(vector<int>& v, int low, int high)
+{
+    int pivot = v[low], up = low, down = high;
+
+    while (up < down)
+    {
+        for (int i = up; i < high; i++)
+        {
+            if (v[up] > pivot)
+                break;
+            up++;
+        }
+        for (int i = high; i > low; i--)
+        {
+            if (v[down] < pivot)
+                break;
+            down--;
+        }
+
+        if (up < down)
+            SwapPos(&v[up], &v[down]);
+    }
+
+    SwapPos(&v[low], &v[down]);
+    return down;
+}
+
+void QuickSort(vector<int>& v, int low, int high)
+{
+    if (low < high)
+    {
+        int pivot = Partition(v, low, high);
+        QuickSort(v, low, pivot - 1);
+        QuickSort(v, pivot + 1, high);
+    }
+}
+
+void Heapify(vector<int>& v, int n, int i)
+{
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+    int largest = i;
+
+    if (n > left && v[left] > v[i])
+    {
+        largest = left;
+    }
+    if (n > right && v[right] > v[largest])
+    {
+        largest = right;
+    }
+    if (largest != i)
+    {
+        swap(v[i], v[largest]);
+        Heapify(v, n, largest);
+    }
+}
+
+void HeapSort(vector<int>& v)
+{
+    int size = v.size();
+    for (int i = (size / 2) - 1; i >= 0; i--)
+        Heapify(v, size, i);
+
+    for (int i = size - 1; i > 0; i--)
+    {
+        swap(v[0], v[i]);
+        Heapify(v, i, 0);
+    }
+}
+
+void BubbleSort(vector<int>& v)
+{
+    for (int i = 0; i < v.size() - 1; i++)
+    {
+        bool swapped = false;
+        for (int j = 0; j < v.size() - i - 1; ++j)
+        {
+            if (v[j] > v[j + 1])
+            {
+                int temp = v[j];
+                v[j] = v[j + 1];
+                v[j + 1] = temp;
+                swapped = true;
+            }
+        }
+
+        if (!swapped)
+            break;
+    }
+}
+
+void Flip(vector<int>& v, int endIndex)
+{
+    int temp, i = 0;
+    while (i < endIndex)
+    {
+        temp = v[i];
+        v[i] = v[endIndex];
+        v[endIndex] = temp;
+        i++;
+        endIndex--;
+    }
+}
+
+int FindMax(vector<int>& v, int size)
+{
+    int maxIndex = 0;
+    for (int i = 0; i < size; i++)
+    {
+        if (v[i] > v[maxIndex])
+            maxIndex = i;
+    }
+    return maxIndex;
+}
+
+void PancakeSort(vector<int>& v)
+{
+    int size = v.size();
+    for (int currSize = size; currSize > 1; currSize--)
+    {
+        int maxIndex = FindMax(v, currSize);
+        if (maxIndex != currSize - 1)
+        {
+            Flip(v, maxIndex);
+            Flip(v, currSize - 1);
+        }
+    }
 }

@@ -29,15 +29,14 @@ int main()
         cout << " 7. Heap Sort" << endl;
         cout << " 8. Radix Sort" << endl;
         cout << " 9. Bucket Sort" << endl;
-        cout << "10. Counting Sort" << endl;
-        cout << "11. Pancake Sort" << endl;
-        cout << "12. Exit the utility" << endl;
+        cout << "10. Pancake Sort" << endl;
+        cout << "11. Exit the utility" << endl;
 
         cin >> input;
         int algorithmSelection = stoi(input);
-        if(algorithmSelection == 12)
+        if(algorithmSelection == 11)
             break;
-        if(algorithmSelection > 11 || algorithmSelection < 1)
+        if(algorithmSelection > 12 || algorithmSelection < 1)
         {
             cout << "Invalid input." << endl;
             continue;
@@ -136,9 +135,6 @@ int main()
                 algorithmName = "Bucket Sort";
                 break;
             case 10:
-                algorithmName = "Counting Sort";
-                break;
-            case 11:
                 algorithmName = "Pancake Sort";
         }
 
@@ -162,13 +158,14 @@ int main()
         plt::ylim(0, yMax);
         plt::xlabel("Array Size, n");
         plt::ylabel("Execution Time (Microseconds)");
-        cout << "Would you like to save this plot? (Y/N)" << endl;
+        cout << "Would you like to save the plot? (Y/N)" << endl;
         cin >> input;
-        if(input[0] == 'Y')
+        if(input[0] == 'Y' || input[0] == 'y')
         {
             cout << "Enter a file name. Do not include a file extension." << endl;
             cin >> input;
             plt::save(input + ".png");
+            cout << "Exported as " << input << ".png" << endl;
         }
         plt::show();
         cout << endl;
@@ -196,22 +193,18 @@ void callSort(int algorithm, vector<int>& values)
             merge(&values[0], 0, values.size() - 1);
             break;
         case 6:
-//            quick(values);
+            QuickSort(values, 0, values.size());
             break;
         case 7:
-//            heap(values);
+            HeapSort(values);
             break;
         case 8:
-//            radix(values);
+//            Radix(values);
             break;
         case 9:
             bucket(values, INT_MAX);
             break;
         case 10:
-//            counting(values);
-            break;
-        case 11:
-//            pancake(values);
-            break;
+            PancakeSort(values);
     }
 }
