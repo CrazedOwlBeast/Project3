@@ -261,3 +261,42 @@ void PancakeSort(vector<int>& v)
         }
     }
 }
+
+int GetMax(vector<int>& v)
+{
+    int max = v[0];
+    for (int i = 1; i < v.size(); i++)
+        if (v[i] > max)
+            max = v[i];
+    return max;
+}
+
+void CountSort(vector<int>& v, int decPlace)
+{
+    vector<int> output;
+    vector<int> count;
+    count.resize(10);
+    output.resize(v.size());
+
+    for (int i = 0; i < v.size(); i++)
+        count[(v[i] / decPlace) % 10]++;
+
+    for (int i = 1; i < count.size(); i++)
+        count[i] += count[i - 1];
+
+    for (int i = v.size() - 1; i >= 0; i--)
+    {
+        output[count[(v[i] / decPlace) % 10] - 1] = v[i];
+        count[(v[i] / decPlace) % 10]--;
+    }
+
+    for (int i = 0; i < v.size(); i++)
+        v[i] = output[i];
+}
+
+void RadixSort(vector<int>& v)
+{
+    int max = GetMax(v);
+    for (int decPlace = 1; (max / decPlace) > 0; decPlace *= 10)
+        CountSort(v, decPlace);
+}

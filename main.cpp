@@ -36,7 +36,7 @@ int main()
         int algorithmSelection = stoi(input);
         if(algorithmSelection == 11)
             break;
-        if(algorithmSelection > 12 || algorithmSelection < 1)
+        if(algorithmSelection > 10 || algorithmSelection < 1)
         {
             cout << "Invalid input." << endl;
             continue;
@@ -181,7 +181,7 @@ void callSort(int algorithm, vector<int>& values)
             selection(values);
             break;
         case 2:
-//            bubble(values);
+            BubbleSort(values);
             break;
         case 3:
             insertion(values);
@@ -199,7 +199,7 @@ void callSort(int algorithm, vector<int>& values)
             HeapSort(values);
             break;
         case 8:
-//            Radix(values);
+            RadixSort(values);
             break;
         case 9:
             bucket(values, INT_MAX);
