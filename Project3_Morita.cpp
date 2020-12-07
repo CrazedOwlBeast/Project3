@@ -104,7 +104,7 @@ void shell(vector<int>& arr) {
 }
 
 //Merge
-void merge(int arr[], int front, int back) {
+void merge(vector<int>& arr, int front, int back) {
 	if (front < back) {
 		int mid = (front + back) / 2;
 		merge(arr, front, mid);
@@ -165,7 +165,7 @@ void bucket(vector<int>& arr, int max) {
 	}
 
 	for (int i = 0; i < n; i++) {
-		index = floor(n * arr[i] / (max + 1));
+		index = floor((long long)n * arr[i] / (max + 1));
 		buckets[index].push_back(arr[i]);
 	}
 
