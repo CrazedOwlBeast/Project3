@@ -6,6 +6,10 @@
 
 #IncludeRegexTransform: 
 
+/home/ltorres/CLionProjects/Project3/generator.h
+vector
+-
+
 /home/ltorres/CLionProjects/Project3/main.cpp
 iostream
 -
@@ -19,8 +23,8 @@ matplotlibcpp.h
 /home/ltorres/CLionProjects/Project3/matplotlibcpp.h
 climits
 -
-randomizer.h
-/home/ltorres/CLionProjects/Project3/randomizer.h
+generator.h
+/home/ltorres/CLionProjects/Project3/generator.h
 sorting.h
 /home/ltorres/CLionProjects/Project3/sorting.h
 
@@ -48,10 +52,6 @@ functional
 numpy/arrayobject.h
 -
 opencv2/opencv.hpp
--
-
-/home/ltorres/CLionProjects/Project3/randomizer.h
-vector
 -
 
 /home/ltorres/CLionProjects/Project3/sorting.h

@@ -88,13 +88,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/ltorres/CLionProjects/Project3/generator.h">
+			<Option target="SortingBenchmarking"/>
+		</Unit>
 		<Unit filename="/home/ltorres/CLionProjects/Project3/main.cpp">
 			<Option target="SortingBenchmarking"/>
 		</Unit>
 		<Unit filename="/home/ltorres/CLionProjects/Project3/matplotlibcpp.h">
-			<Option target="SortingBenchmarking"/>
-		</Unit>
-		<Unit filename="/home/ltorres/CLionProjects/Project3/randomizer.h">
 			<Option target="SortingBenchmarking"/>
 		</Unit>
 		<Unit filename="/home/ltorres/CLionProjects/Project3/sorting.h">
