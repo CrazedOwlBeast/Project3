@@ -12,7 +12,7 @@ using namespace std;
 // - Counting Sort (if done with everything else)
 // - Radix Sort (if done with every thing else)
 
-void SwapPos(int* a, int* b) 
+void SwapPos(int* a, int* b) // Don't really need this, can use std swap instead
 {
 	int temp = *a;
 	*a = *b;
@@ -38,10 +38,10 @@ int Partition(vector<int>& v, int low, int high)
 		}
 
 		if (up < down)
-			SwapPos(&v[up], &v[down]);
+			swap(v[up], v[down]);
 	}
 
-	SwapPos(&v[low], &v[down]);
+	swap(v[low], v[down]);
 	return down;
 }
 void QuickSort(vector<int>& v, int low, int high)
@@ -120,7 +120,7 @@ void Flip(vector<int>& v, int endIndex)
 		endIndex--;
 	}
 }
-int FindMax(vector<int>& v, int size)
+int FindMaxIndex(vector<int>& v, int size)
 {
 	int maxIndex = 0;
 	for (int i = 0; i < size; i++)
@@ -135,13 +135,50 @@ void PancakeSort(vector<int>& v)
 	int size = v.size();
 	for (int currSize = size; currSize > 1; currSize--)
 	{
-		int maxIndex = FindMax(v, currSize);
+		int maxIndex = FindMaxIndex(v, currSize);
 		if (maxIndex != currSize - 1)
 		{
 			Flip(v, maxIndex);
 			Flip(v, currSize - 1);
 		}
 	}
+}
+
+int GetMax(vector<int>& v)
+{
+	int max = v[0];
+	for (int i = 1; i < v.size(); i++)
+		if (v[i] > max)
+			max = v[i];
+	return max;
+}
+void CountSort(vector<int>& v, int decPlace)
+{
+	vector<int> output; 
+	vector<int> count;
+	count.resize(10);
+	output.resize(v.size());
+ 
+	for (int i = 0; i < v.size(); i++)
+		count[(v[i] / decPlace) % 10]++;
+	
+	for (int i = 1; i < count.size(); i++)
+		count[i] += count[i - 1];
+	
+	for (int i = v.size() - 1; i >= 0; i--)
+	{
+		output[count[(v[i] / decPlace) % 10] - 1] = v[i];
+		count[(v[i] / decPlace) % 10]--;
+	}
+
+	for (int i = 0; i < v.size(); i++)
+		v[i] = output[i];
+}
+void RadixSort(vector<int>& v)
+{
+	int max = GetMax(v);
+	for (int decPlace = 1; (max / decPlace) > 0; decPlace *= 10)
+		CountSort(v, decPlace);
 }
 
 void PrintVector(vector<int> v)
@@ -157,15 +194,18 @@ void PrintVector(vector<int> v)
 int main()
 {
 	vector<int> nums;
-	for (int i = 2000; i > 0; i--)
+	for (int i = 20; i > 0; i--)
 		nums.push_back(i);
 
-	//PrintVector(nums);
-	clock_t t = clock();
 	int n = nums.size();
-	QuickSort(nums, 0, n - 1);
+	PrintVector(nums);
+
+	clock_t t = clock();
+	RadixSort(nums);
+	//QuickSort(nums, 0, n - 1);
 	t = clock() - t;
-	//PrintVector(nums);
+
+	PrintVector(nums);
 	cout << endl;
 	printf("It took %d clicks or %f seconds to execute the sort.", t, ((float)t / CLOCKS_PER_SEC));
 	cout << endl;
