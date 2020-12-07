@@ -1,4 +1,8 @@
+#pragma once
 #include <vector>
+#include <limits.h>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 

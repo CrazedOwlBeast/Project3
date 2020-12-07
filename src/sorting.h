@@ -1,5 +1,8 @@
+#pragma once
 #include <vector>
 #include <cmath>
+
+using namespace std;
 
 //Selection
 void selection(vector<int> &arr) {

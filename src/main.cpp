@@ -1,12 +1,11 @@
-#pragma once
 #include <iostream>
 #include <vector>
 #include <string>
 #include <chrono>
-#include "matplotlibcpp.h"
 #include <climits>
 #include "generator.h"
 #include "sorting.h"
+#include "matplotlibcpp.h"
 
 using namespace std;
 namespace plt = matplotlibcpp;
@@ -98,7 +97,7 @@ int main()
                 if(executionTime.count() > yMax)
                     yMax = executionTime.count();
                 count += (arrayLength/1e120)*(arrayLength/1e120);
-                cout << "[" << count / total * 100 << "%]\r";
+                cout << "[" << count / total * 100 << "%]                    \r";
                 cout.flush();
             }
         }
