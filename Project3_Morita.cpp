@@ -53,7 +53,10 @@ RNG::RNG(int size, int max) {
 
 
 //Sorting Algos
-//NOTE: all require a vector except for merge
+//NOTE: these all require a vector
+
+//Inspiration Taken from Lectures
+//https://www.youtube.com/playlist?list=PLvBZ6Nw3S6DTVfchDzZsYIgfaMBPgGj5L
 
 //Selection
 void selection(vector<int> &arr) {
