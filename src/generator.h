@@ -6,7 +6,8 @@
 
 using namespace std;
 
-//stores ints as a vector and an array, also the max value if needed
+// Gen class stores an array and vector (for flexibility). Constructor requires a size for array initialization.
+// Class member functions are used to populate the array and vector with values. 
 
 class Gen {
 public:

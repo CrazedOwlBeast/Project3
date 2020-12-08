@@ -34,11 +34,11 @@ int main()
         cin >> input;
         int algorithmSelection = stoi(input);
         if(algorithmSelection == 11)
-            break;
+            break; // Exits while(true) loop, ends program.
         if(algorithmSelection > 10 || algorithmSelection < 1)
         {
             cout << "Invalid input." << endl;
-            continue;
+            continue; // Revert to main menu.
         }
 
         cout << "What type of array should be tested?" << endl;
@@ -69,6 +69,7 @@ int main()
 
         vector<int> sizes;
         vector<long> times;
+        // Progress estimation calculations
         long double total = 0;
         for(int arrayLength = lower; arrayLength <= upper; arrayLength += interval)
             for(int i = 0; i < trials; i++)
@@ -81,6 +82,7 @@ int main()
         {
             for(int i = 0; i < trials; i++)
             {
+                // Generate the array based on user input.
                 Gen values(arrayLength);
                 if(arrayType == 1)
                     values.Randomize();
@@ -89,20 +91,27 @@ int main()
                 else if(arrayType == 3)
                     values.Descending();
                 auto start = chrono::high_resolution_clock::now();
+                // Call the sorting algorithm.
                 callSort(algorithmSelection, values.vec);
                 auto end = chrono::high_resolution_clock::now();
                 auto executionTime = chrono::duration_cast<chrono::microseconds>(end - start);
+                // Store the array length (x-coordinate)
                 sizes.push_back(arrayLength);
+                // Store the execution time (y-coordinate)
                 times.push_back(executionTime.count());
+                // Find max value. Needed for knowing the Y axis range to plot.
                 if(executionTime.count() > yMax)
                     yMax = executionTime.count();
+
+                // Progress Calculation and Output
                 count += (arrayLength/1e120)*(arrayLength/1e120);
-                cout << "[" << count / total * 100 << "%]                    \r";
+                cout << "[" << count / total * 100 << "%]                    \r"; // Spaces needed to overwrite all characters.
                 cout.flush();
             }
         }
         cout << endl;
 
+        // Get the name of the algorithm used to put in the title of the plot
         string algorithmName;
         switch(algorithmSelection)
         {
@@ -137,6 +146,7 @@ int main()
                 algorithmName = "Pancake Sort";
         }
 
+        // Get the name of the test type to put in the title of the plot.
         string testType;
         switch(arrayType)
         {
@@ -150,6 +160,7 @@ int main()
                 testType = "Arrays in Reverse Sorted Order";
         }
 
+        // Plotting
         plt::figure_size(1200, 780);
         plt::scatter(sizes, times);
         plt::title("Execution time of " + algorithmName + ", " + testType);
@@ -174,6 +185,7 @@ int main()
 
 void callSort(int algorithm, vector<int>& values)
 {
+    // Convert the user's number to the proper function call.
     switch(algorithm)
     {
         case 1:

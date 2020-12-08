@@ -4,6 +4,8 @@
 
 using namespace std;
 
+// Contains all sorting algorithms and any helper functions.
+
 //Selection
 void selection(vector<int> &arr) {
     int min;
